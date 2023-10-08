@@ -21,15 +21,18 @@ public class DoctorService {
         doctorRepository.save(Doctor.builder()
                 .firstName(doctorCreateRequest.getFirstName())
                 .lastName(doctorCreateRequest.getLastName())
+                .branch(doctorCreateRequest.getBranch())
                 .build());
     }
 
     public List<DoctorDto> getAll() {
         final List<Doctor> doctorList = doctorRepository.findAll();
         return doctorList.stream().map(doctor -> DoctorDto.builder()
+                        .id(doctor.getId())
                         .firstName(doctor.getFirstName())
                         .lastName(doctor.getLastName())
                         .branch(doctor.getBranch())
+                        .createdDate(doctor.getCreatedDate())
                         .build())
                 .collect(Collectors.toList());
     }

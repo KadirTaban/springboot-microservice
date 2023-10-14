@@ -1,6 +1,5 @@
-package kadir.dev.examinationservice.model.dto;
+package kadir.dev.patientservice.dto;
 
-import kadir.dev.examinationservice.entity.Doctor;
 import lombok.Builder;
 import lombok.Data;
 

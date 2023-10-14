@@ -17,7 +17,7 @@ public class DoctorService {
 
     private final DoctorRepository doctorRepository;
 
-    public void create(@RequestBody DoctorCreateRequest doctorCreateRequest){
+    public void create(DoctorCreateRequest doctorCreateRequest){
         doctorRepository.save(Doctor.builder()
                 .firstName(doctorCreateRequest.getFirstName())
                 .lastName(doctorCreateRequest.getLastName())

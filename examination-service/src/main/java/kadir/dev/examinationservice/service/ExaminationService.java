@@ -2,6 +2,7 @@ package kadir.dev.examinationservice.service;
 
 import jakarta.validation.Valid;
 import kadir.dev.examinationservice.entity.Examination;
+import kadir.dev.examinationservice.model.converter.DoctorConverter;
 import kadir.dev.examinationservice.model.dto.ExaminationDto;
 import kadir.dev.examinationservice.model.request.ExaminationCreateRequest;
 import kadir.dev.examinationservice.repository.ExaminationRepository;
@@ -17,8 +18,9 @@ import java.util.stream.Collectors;
 public class ExaminationService {
 
     private final ExaminationRepository examinationRepository;
+    private final DoctorConverter doctorConverter;
 
-    public void create(@RequestBody @Valid ExaminationCreateRequest examinationCreateRequest){
+    public void create(ExaminationCreateRequest examinationCreateRequest){
         examinationRepository.save(Examination.builder()
                         .description(examinationCreateRequest.getDescription())
                         .doctor(examinationCreateRequest.getDoctor())
@@ -30,7 +32,7 @@ public class ExaminationService {
         return examinationList.stream().map(examination -> ExaminationDto.builder()
                         .id(examination.getId())
                         .description(examination.getDescription())
-                        .doctor(examination.getDoctor())
+                        .doctor(doctorConverter.convertAsDto(examination.getDoctor()))
                         .createdDate(examination.getCreatedDate())
                         .build())
                 .collect(Collectors.toList());

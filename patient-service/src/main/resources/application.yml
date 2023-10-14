@@ -8,8 +8,12 @@ spring:
     url: jdbc:postgresql://localhost:5432/patient
     username: postgres
     password: 123
-    driverClassName: org.postgresql.Driver
+    driverClassName:
 
-springdoc:
-  swagger-ui:
-    path: /swagger-ui.html
+server:
+  port: 8000
+
+
+examination:
+  api:
+    url: http://127.0.0.1:8080/

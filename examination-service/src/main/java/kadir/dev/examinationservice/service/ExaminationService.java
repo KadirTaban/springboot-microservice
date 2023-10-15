@@ -23,7 +23,8 @@ public class ExaminationService {
     public void create(ExaminationCreateRequest examinationCreateRequest){
         examinationRepository.save(Examination.builder()
                         .description(examinationCreateRequest.getDescription())
-                        .doctor(examinationCreateRequest.getDoctor())
+                        .doctor(doctorConverter.convertAsEntity(examinationCreateRequest.getDoctor()))
+                        .patientTckno(examinationCreateRequest.getPatient().getTckNo())
                         .build());
     }
 

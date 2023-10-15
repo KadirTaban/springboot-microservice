@@ -16,4 +16,13 @@ public class DoctorConverter {
                 .lastName(doctor.getLastName())
                 .build();
     }
+
+    public Doctor convertAsEntity(DoctorDto dto){
+        return Doctor.builder()
+                .firstName(dto.getFirstName())
+                .lastName(dto.getLastName())
+                .branch(dto.getBranch())
+                .createdDate(dto.getCreatedDate())
+                .build();
+    }
 }

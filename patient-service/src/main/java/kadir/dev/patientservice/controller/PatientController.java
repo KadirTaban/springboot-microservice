@@ -1,6 +1,7 @@
 package kadir.dev.patientservice.controller;
 
 import kadir.dev.patientservice.dto.ExaminationDto;
+import kadir.dev.patientservice.dto.PatientDto;
 import kadir.dev.patientservice.dto.SavePatientCreateRequest;
 import kadir.dev.patientservice.entity.Patient;
 import kadir.dev.patientservice.service.PatientService;
@@ -24,6 +25,11 @@ public class PatientController {
     @GetMapping("/all-examinations")
     public List<ExaminationDto> getAllExaminations(){
         return patientService.getAllExamination();
+    }
+
+    @GetMapping
+    public PatientDto get(@RequestParam String tckNo) throws Exception {
+        return patientService.getExamination(tckNo);
     }
 
 

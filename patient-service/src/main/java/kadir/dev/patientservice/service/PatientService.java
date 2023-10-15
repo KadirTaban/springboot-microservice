@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -35,5 +36,16 @@ public class PatientService {
 
     public List<ExaminationDto> getAllExamination(){
         return examinationClient.getAll();
+    }
+
+    public PatientDto getExamination(String tckNo) throws Exception {
+        final Optional<Patient> optionalPatient = patientRepository.findPatientByTckNo(tckNo);
+        if (optionalPatient.isEmpty()){
+            throw new Exception("The patient rudder came out.");
+        }
+
+        final Patient patient = optionalPatient.get();
+        return converter.convertAsDto(patient);
+
     }
 }

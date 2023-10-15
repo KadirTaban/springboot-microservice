@@ -23,6 +23,8 @@ public class Examination {
     private String description;
     @ManyToOne
     private Doctor doctor;
+    @Column(name = "patient_tckno")
+    private String patientTckno;
     @CreationTimestamp
     private Date createdDate;
 

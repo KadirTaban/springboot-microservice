@@ -28,4 +28,6 @@ public class ExaminationController {
         return examinationService.getAll();
     }
 
+
+
 }

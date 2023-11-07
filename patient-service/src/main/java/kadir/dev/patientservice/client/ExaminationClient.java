@@ -9,7 +9,7 @@ import java.util.List;
 @FeignClient(value = "examinationApiClient", url = "${examination.api.url}")
 public interface ExaminationClient {
 
-    @GetMapping("examinations/all")
+    @GetMapping("/examinations/all")
     List<ExaminationDto> getAll();
 
 }

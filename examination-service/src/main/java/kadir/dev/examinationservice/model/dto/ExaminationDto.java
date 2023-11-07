@@ -1,6 +1,5 @@
 package kadir.dev.examinationservice.model.dto;
 
-import kadir.dev.examinationservice.entity.Doctor;
 import lombok.Builder;
 import lombok.Data;
 
@@ -14,4 +13,5 @@ public class ExaminationDto {
     private String description;
     private DoctorDto doctor;
     private Date createdDate;
+
 }

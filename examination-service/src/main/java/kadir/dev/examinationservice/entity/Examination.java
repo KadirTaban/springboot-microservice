@@ -10,7 +10,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import java.util.Date;
 
 @Entity
-@Table(name="examinations")
+@Table(name="examination")
 @Data
 @Builder
 @AllArgsConstructor
@@ -21,13 +21,16 @@ public class Examination {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     private String description;
-    @ManyToOne
-    private Doctor doctor;
+    @Column(name = "doctor_id")
+    private long doctorId;
     @Column(name = "patient_tckno")
     private String patientTckno;
     @CreationTimestamp
     private Date createdDate;
 
+    @ManyToOne
+    @JoinColumn(name = "doctor_id", insertable = false, updatable = false ,nullable = false, foreignKey = @ForeignKey(name = "FK__examination__doctor"))
+    private Doctor doctor;
 
 
 

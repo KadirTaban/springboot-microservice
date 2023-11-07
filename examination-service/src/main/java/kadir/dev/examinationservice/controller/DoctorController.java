@@ -7,7 +7,6 @@ import kadir.dev.examinationservice.service.DoctorService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
-import java.awt.print.Pageable;
 import java.util.List;
 
 @RestController
@@ -16,6 +15,7 @@ import java.util.List;
 public class DoctorController {
 
     private final DoctorService doctorService;
+
     @PostMapping
     public void createDoctor(@RequestBody @Valid DoctorCreateRequest doctorCreateRequest) {
         doctorService.create(doctorCreateRequest);
@@ -25,5 +25,4 @@ public class DoctorController {
     public List<DoctorDto> getAll(){
         return doctorService.getAll();
     }
-
 }

@@ -8,8 +8,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @FeignClient(value = "patientApiClient", url = "${patient.api.url}")
 public interface PatientClient {
 
-    @GetMapping
+    @GetMapping("/patient")
     PatientDto get(@RequestParam String tckNo);
-
 
 }

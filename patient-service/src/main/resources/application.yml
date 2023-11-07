@@ -11,7 +11,7 @@ spring:
     driverClassName:
 
 server:
-  port: 8000
+  port: 4000
 
 
 examination:

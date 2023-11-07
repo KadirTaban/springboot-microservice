@@ -1,14 +1,15 @@
 package kadir.dev.examinationservice.service;
 
-import jakarta.validation.Valid;
+import kadir.dev.examinationservice.client.PatientClient;
 import kadir.dev.examinationservice.entity.Examination;
 import kadir.dev.examinationservice.model.converter.DoctorConverter;
 import kadir.dev.examinationservice.model.dto.ExaminationDto;
+import kadir.dev.examinationservice.model.dto.PatientDto;
 import kadir.dev.examinationservice.model.request.ExaminationCreateRequest;
 import kadir.dev.examinationservice.repository.ExaminationRepository;
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -19,12 +20,18 @@ public class ExaminationService {
 
     private final ExaminationRepository examinationRepository;
     private final DoctorConverter doctorConverter;
+    private final PatientClient patientClient;
 
     public void create(ExaminationCreateRequest examinationCreateRequest){
+
+        final PatientDto patientDto = patientClient.get(examinationCreateRequest.getPatientTckno());
+        if (StringUtils.isNotEmpty(patientDto.getTckNo())){
+            return;
+        }
         examinationRepository.save(Examination.builder()
                         .description(examinationCreateRequest.getDescription())
-                        .doctor(doctorConverter.convertAsEntity(examinationCreateRequest.getDoctor()))
-                        .patientTckno(examinationCreateRequest.getPatient().getTckNo())
+                        .doctorId(examinationCreateRequest.getDoctorId())
+                        .patientTckno(examinationCreateRequest.getPatientTckno())
                         .build());
     }
 

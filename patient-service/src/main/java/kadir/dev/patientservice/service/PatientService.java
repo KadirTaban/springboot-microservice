@@ -8,7 +8,6 @@ import kadir.dev.patientservice.dto.converter.PatientDtoConverter;
 import kadir.dev.patientservice.entity.Patient;
 import kadir.dev.patientservice.repository.PatientRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,7 +22,6 @@ public class PatientService {
     private final ExaminationClient examinationClient;
 
     public Patient createPatient(SavePatientCreateRequest savePatientRequestDto) {
-
         PatientDto patientDto = converter.convertToDto(savePatientRequestDto);
             return patientRepository.save(Patient.builder()
                 .name(patientDto.getName())
@@ -38,10 +36,10 @@ public class PatientService {
         return examinationClient.getAll();
     }
 
-    public PatientDto getExamination(String tckNo) throws Exception {
+    public PatientDto getExamination(String tckNo) {
         final Optional<Patient> optionalPatient = patientRepository.findPatientByTckNo(tckNo);
         if (optionalPatient.isEmpty()){
-            throw new Exception("The patient rudder came out.");
+            return null;
         }
 
         final Patient patient = optionalPatient.get();

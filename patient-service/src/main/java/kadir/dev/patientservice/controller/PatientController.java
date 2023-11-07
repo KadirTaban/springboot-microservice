@@ -28,9 +28,8 @@ public class PatientController {
     }
 
     @GetMapping
-    public PatientDto get(@RequestParam String tckNo) throws Exception {
+    public PatientDto get(@RequestParam String tckNo)  {
         return patientService.getExamination(tckNo);
     }
-
 
 }
